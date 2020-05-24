@@ -14,11 +14,11 @@ export default [
       {
         file: pkg.browser,
         format: 'iife',
-        // sourcemap: 'inline',
-        globals,
-        name: 'viewerCesiumNavigationMixin'
+        name: 'viewerCesiumNavigationMixin',
+        globals
       }
     ],
+    external: Object.keys(globals),
     plugins: [
       resolve(),
       commonjs(),
@@ -27,20 +27,13 @@ export default [
       })
     ]
   },
-
-  // CommonJS (for Node) and ES module (for bundlers) build.
-  // (We could have three entries in the configuration array
-  // instead of two, but it's quicker to generate multiple
-  // builds from a single configuration where possible, using
-  // an array for the `output` option, where we can specify 
-  // `file` and `format` for each target)
   {
     input: 'src/viewerCesiumMultiItemPickerMixin.js',
-    external: Object.keys(globals),
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }
     ],
+    external: Object.keys(globals),
     plugins: [
       babel({
         exclude: ['node_modules/**']

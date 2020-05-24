@@ -31,6 +31,7 @@ Destroys the mixin.
 __Note:__
 The destroy method also gets called automatically when calling `viewer.destroy()`.
 So it's not entirely necessary to call this method.
+
 __Example__
 ```js
 viewer.CesiumMultiItemPickerMixin.destroy()
