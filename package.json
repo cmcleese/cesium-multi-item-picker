@@ -1,0 +1,42 @@
+{
+  "name": "cesium-multi-item-picker",
+  "version": "1.0.0",
+  "description": "Simple multi-item picker for Cesium",
+  "main": "dist/viewerCesiumMultiItemPickerMixin.cjs.js",
+  "module": "dist/viewerCesiumMultiItemPickerMixin.esm.js",
+  "browser": "dist/viewerCesiumMultiItemPickerMixin.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmcleese/cesium-multi-item-picker.git"
+  },
+  "keywords": [
+    "cesium",
+    "entities",
+    "imagery"
+  ],
+  "author": "Chris Mcleese",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmcleese/cesium-multi-item-picker/issues"
+  },
+  "homepage": "https://github.com/cmcleese/cesium-multi-item-picker#readme",
+  "dependencies": {
+    "cesium": "^1.69.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "rollup": "^2.10.9",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
