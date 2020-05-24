@@ -13,15 +13,18 @@ or
 ## Usage
 ### Init
 ```js
+
+import CesiumMultiItemPickerMixin from 'cesium-multi-item-picker'
+
 const viewer = new Cesium.Viewer('cesiumContainer')
-viewer.extend(cesiumMultiItemPicker)
-viewer.cesiumMultiItemPicker.onPicked.addEventListener((picked) => {
+viewer.extend(CesiumMultiItemPickerMixin)
+viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener((picked) => {
     // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]
     console.log(picked)
 , this)
  ```
 ### Destroy
 ```js
-viewer.cesiumMultiItemPicker.destroy()
+viewer.CesiumMultiItemPickerMixin.destroy()
 ```
 ## [License](./LICENSE)
