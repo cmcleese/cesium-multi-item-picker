@@ -13,7 +13,7 @@ export default [
     output: [
       {
         file: pkg.browser,
-        format: 'iife',
+        format: 'umd',
         name: 'viewerCesiumNavigationMixin',
         globals
       }
