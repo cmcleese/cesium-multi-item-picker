@@ -3,6 +3,7 @@
 Simple multi item picker for Cesium.
 
 This add the ability to drill pick any entities or imagery layers based on the cursor position on the map.
+
 What is then returned is an array with the entities and/or the imagery layer feature info.
 
 ## Install
@@ -28,8 +29,10 @@ viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener((picked) => {
 ## Methods
 ### Destroy
 Destroys the mixin.
+
 __Note:__
 The destroy method also gets called automatically when calling `viewer.destroy()`.
+
 So it's not entirely necessary to call this method.
 
 __Example__
@@ -41,6 +44,7 @@ viewer.CesiumMultiItemPickerMixin.destroy()
 ### onPicked
 Fired when a `left mouse up` event is triggered on the Cesium Ellipsoid.
 This also works on mobile touch.
+
 See [Cesium.ScreenSpaceEventType.LEFT_UP](https://cesium.com/docs/cesiumjs-ref-doc/ScreenSpaceEventType.html?classFilter=scree#.LEFT_UP)
 
 __Arguments__
@@ -49,6 +53,7 @@ __Arguments__
 __Returns__
 - `[Array]`
 Types: [Entity](https://cesium.com/docs/cesiumjs-ref-doc/Entity.html?classFilter=entity) , [ImageryLayerFeatureInfo](https://cesium.com/docs/cesiumjs-ref-doc/ImageryLayerFeatureInfo.html?classFilter=feature)
+
 Ex: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]`
 
 __Example__
