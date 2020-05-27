@@ -33,13 +33,13 @@ function viewerCesiumMultiItemPickerMixin (viewer) {
 
   Object.defineProperties(viewer, {
     cesiumMultiItemPicker: {
-      get: function () {
+      get: () => {
         return cesiumMultiItemPicker
       }
     }
   })
 
-  viewer.destroy = wrapFunction(viewer, viewer.destroy, function () {
+  viewer.destroy = wrapFunction(viewer, viewer.destroy, () => {
     viewer.cesiumMultiItemPicker.destroy()
   })
 }

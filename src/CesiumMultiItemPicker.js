@@ -55,6 +55,7 @@ export default class CesiumMultiItemPicker {
  * @param   {Object}  mouse  The mouse position object (Cartesian2).
  *
  * @return  {Boolean|Event}  The event raised or cancelled event.
+ *                           Args passed is array of: [{Entity}, {ImageryLayerFeatureInfo}]
  */
 async function mousePicker (mouse) {
   const mousePos = mouse.position
@@ -79,10 +80,11 @@ async function mousePicker (mouse) {
   const pickedEntities = this._viewer.scene.drillPick(mousePos)
   // if there are entities found
   if (pickedEntities.length) {
-    // store the entities
-    this.pickedList = this.pickedList.concat(pickedEntities)
+    // extract and store the picked entities only
+    this.pickedList = this.pickedList.concat(pickedEntities.map(x => x.id))
   }
-  // if there items picked and found, raise the event
+  // if there items picked and found, raise the event and pass the 
+  // pickedList as a combination of: [{Entity}, {ImageryLayerFeatureInfo}]
   return this.pickedList.length && this.onPicked.raiseEvent(this.pickedList)
 }
 
@@ -102,7 +104,7 @@ async function getImageryLayerFeatures (position) {
     this._viewer.scene
   )
   // filter any found features that only include feature info properties
-  const filteredFeatures = featuresPromise.filter(function (x) {
+  const filteredFeatures = featuresPromise.filter( x => {
     return x.properties && Object.getOwnPropertyNames(x.properties).length
   })
   // return the filtered features
