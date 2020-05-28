@@ -21,10 +21,10 @@ Subscribe to the `onPicked` event.
 ```js
 const viewer = new Cesium.Viewer('cesiumContainer')
 viewer.extend(CesiumMultiItemPickerMixin)
-viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener((picked) => {
+viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener(picked => {
     // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]
     console.log(picked)
-, this)
+}, this)
  ```
 ## Methods
 ### Destroy

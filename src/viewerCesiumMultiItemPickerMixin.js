@@ -15,9 +15,9 @@ import CesiumMultiItemPicker from './CesiumMultiItemPicker'
  * // Add multi item picker support to viewer.
  * var viewer = new Cesium.Viewer('cesiumContainer')
  * viewer.extend(cesiumMultiItemPicker)
- * viewer.cesiumMultiItemPicker.onPicked.addEventListener((picked) => {
+ * viewer.cesiumMultiItemPicker.onPicked.addEventListener(picked => {
  *   console.log(picked)
- * , this)
+ * }, this)
  */
 function viewerCesiumMultiItemPickerMixin (viewer) {
   if (!defined(viewer)) {
