@@ -33,19 +33,10 @@ export default class CesiumMultiItemPicker {
     // create mouse handler
     this.mouseHandler = new ScreenSpaceEventHandler(this._viewer.scene.canvas)
 
-    // create the callback for mouse left down
-    this.mouseHandler.setInputAction(
-      // track the last mouse down position
-      mouse => {
-        this.lastMouseDownPos = mouse.position
-      },
-      ScreenSpaceEventType.LEFT_DOWN
-    )
-
-    // create the callback for mouse left up
+    // create the callback for left click
     this.mouseHandler.setInputAction(
       mousePicker.bind(this),
-      ScreenSpaceEventType.LEFT_UP
+      ScreenSpaceEventType.LEFT_CLICK
     )
   }
 
@@ -70,9 +61,7 @@ async function mousePicker(mouse) {
   // reset the picked list
   this.pickedList = []
   // if the current position contains Cartesian coordiantes then the position is on the globe
-  // and if the last mouse down position matches the mouse up position (not clicking and dragging)
-  if (this.lastMouseDownPos.equals(mousePos) && isCartesian.call(this, mousePos)) {
-
+  if (isCartesian.call(this, mousePos)) {
     // if there are any enabled imagery layers aside from the basemap layer
     if (this._viewer.scene.imageryLayers.length > 1) {
       // get any possible imagery layer features at the provided position coordinates

@@ -42,10 +42,10 @@ viewer.CesiumMultiItemPickerMixin.destroy()
 
 ## Events
 ### onPicked
-Fired when a `left mouse up` event is triggered on the Cesium Ellipsoid.
-This also works on mobile touch.
+Fired when a `Left Click` event is triggered on the Cesium Ellipsoid.
+Also trigger by a 'Tap' event.
 
-See [Cesium.ScreenSpaceEventType.LEFT_UP](https://cesium.com/docs/cesiumjs-ref-doc/ScreenSpaceEventType.html?classFilter=scree#.LEFT_UP)
+See [Cesium.ScreenSpaceEventType.LEFT_CLICK](https://cesium.com/docs/cesiumjs-ref-doc/ScreenSpaceEventType.html?classFilter=ScreenSpaceEventType#.LEFT_CLICK)
 
 __Returns__
 - `[Array]`
