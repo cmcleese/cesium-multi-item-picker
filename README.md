@@ -47,22 +47,19 @@ This also works on mobile touch.
 
 See [Cesium.ScreenSpaceEventType.LEFT_UP](https://cesium.com/docs/cesiumjs-ref-doc/ScreenSpaceEventType.html?classFilter=scree#.LEFT_UP)
 
-__Arguments__
-- `none`
-
 __Returns__
 - `[Array]`
 Types: [Entity](https://cesium.com/docs/cesiumjs-ref-doc/Entity.html?classFilter=entity) , [ImageryLayerFeatureInfo](https://cesium.com/docs/cesiumjs-ref-doc/ImageryLayerFeatureInfo.html?classFilter=feature)
 
-Ex: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]`
+  __ex__: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]`
 
 __Example__
 
 ```js
-viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener((picked) => {
+viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener( picked => {
     // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]
     console.log(picked)
-, this)
+}, this)
 ```
 
 ## [License](./LICENSE)

@@ -62,16 +62,17 @@ export default class CesiumMultiItemPicker {
  *
  * @param   {Object}  mouse  The mouse position object (Cartesian2).
  *
- * @return  {Boolean|Event}  The event raised or cancelled event.
- *                           Args passed is array of: [{Entity}, {ImageryLayerFeatureInfo}]
+ * @return  {Array}          The raised event which returns the array of picked items.
+*                            Ex: [{Entity}, {ImageryLayerFeatureInfo}, ...]
  */
 async function mousePicker(mouse) {
   const mousePos = mouse.position
+  // reset the picked list
+  this.pickedList = []
   // if the current position contains Cartesian coordiantes then the position is on the globe
   // and if the last mouse down position matches the mouse up position (not clicking and dragging)
   if (this.lastMouseDownPos.equals(mousePos) && isCartesian.call(this, mousePos)) {
-    // reset the picked list
-    this.pickedList = []
+
     // if there are any enabled imagery layers aside from the basemap layer
     if (this._viewer.scene.imageryLayers.length > 1) {
       // get any possible imagery layer features at the provided position coordinates
@@ -90,12 +91,10 @@ async function mousePicker(mouse) {
       // extract and store the picked entities only
       this.pickedList = this.pickedList.concat(pickedEntities.map(x => x.id))
     }
-    // if there items picked and found, raise the event and pass the 
-    // pickedList as a combination of: [{Entity}, {ImageryLayerFeatureInfo}]
-    return this.pickedList.length && this.onPicked.raiseEvent(this.pickedList)
   }
-  // no matching positions or not clicking on map
-  return false
+  // if there are items picked, raise the event and pass the pickedList array
+  // otherwise returns an empty array if not picked items found
+  return this.onPicked.raiseEvent(this.pickedList)
 }
 
 /**
