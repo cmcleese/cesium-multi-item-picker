@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/cmcleese/cesium-multi-item-picker#readme",
   "dependencies": {
-    "cesium": "^1.69.0"
+    "cesium": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
