@@ -41,10 +41,10 @@ export default class CesiumMultiItemPicker {
   }
 
   /**
-   * Destory the mouse handler.
+   * Destory the mouse handler if it is not already destroyed.
    */
   destroy() {
-    this.mouseHandler && this.mouseHandler.destroy()
+    this.mouseHandler && !this.mouseHandler.isDestroyed() && this.mouseHandler.destroy()
   }
 }
 
