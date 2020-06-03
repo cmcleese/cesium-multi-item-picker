@@ -8,7 +8,7 @@ import {
 } from 'cesium'
 
 export default class CesiumMultiItemPicker {
-  constructor(viewer) {
+  constructor (viewer) {
     if (!defined(viewer)) {
       throw new DeveloperError('viewer is required.')
     }
@@ -29,7 +29,7 @@ export default class CesiumMultiItemPicker {
   /**
    * Initialize the mouse handler events and picker.
    */
-  init() {
+  init () {
     // create mouse handler
     this.mouseHandler = new ScreenSpaceEventHandler(this._viewer.scene.canvas)
 
@@ -43,7 +43,7 @@ export default class CesiumMultiItemPicker {
   /**
    * Destory the mouse handler if it is not already destroyed.
    */
-  destroy() {
+  destroy () {
     this.mouseHandler && !this.mouseHandler.isDestroyed() && this.mouseHandler.destroy()
   }
 }
@@ -56,7 +56,7 @@ export default class CesiumMultiItemPicker {
  * @return  {Array}          The raised event which returns the array of picked items.
 *                            Ex: [{Entity}, {ImageryLayerFeatureInfo}, ...]
  */
-async function mousePicker(mouse) {
+async function mousePicker (mouse) {
   const mousePos = mouse.position
   // reset the picked list
   this.pickedList = []
@@ -93,20 +93,29 @@ async function mousePicker(mouse) {
  *
  * @return  {Array}                 The array of features.
  */
-async function getImageryLayerFeatures(position) {
-  // get the ray for lookup
-  const pickRay = this._viewer.camera.getPickRay(position)
-  // look for imagery layer features at provided ray
-  const featuresPromise = await this._viewer.imageryLayers.pickImageryLayerFeatures(
-    pickRay,
-    this._viewer.scene
-  )
-  // filter any found features that only include feature info properties
-  const filteredFeatures = featuresPromise.filter(x => {
-    return x.properties && Object.getOwnPropertyNames(x.properties).length
+function getImageryLayerFeatures (position) {
+  return new Promise(resolve => {
+    // get the ray for lookup
+    const pickRay = this._viewer.camera.getPickRay(position)
+    // look for imagery layer features at provided ray
+    const featuresPromise = this._viewer.imageryLayers.pickImageryLayerFeatures(
+      pickRay,
+      this._viewer.scene
+    )
+    // nothing picked
+    if (!defined(featuresPromise)) {
+      resolve([])
+    } else {
+      featuresPromise.then(featuresPromiseVal => {
+        // filter any found features that only include feature info properties
+        const filteredFeatures = featuresPromiseVal.filter(x => {
+          return x.properties && Object.getOwnPropertyNames(x.properties).length
+        })
+        // return the filtered features
+        resolve(filteredFeatures)
+      })
+    }
   })
-  // return the filtered features
-  return filteredFeatures
 }
 
 /**
@@ -116,7 +125,7 @@ async function getImageryLayerFeatures(position) {
  *
  * @return  {Cartesian3}            The found position on the ellipsoid.
  */
-function isCartesian(position) {
+function isCartesian (position) {
   return this._viewer.camera.pickEllipsoid(
     position,
     this._viewer.scene.globe.ellipsoid
