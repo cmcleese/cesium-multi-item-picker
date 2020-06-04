@@ -54,7 +54,7 @@ export default class CesiumMultiItemPicker {
  * @param   {Object}  mouse  The mouse position object (Cartesian2).
  *
  * @return  {Array}          The raised event which returns the array of picked items.
-*                            Ex: [{Entity}, {ImageryLayerFeatureInfo}, ...]
+*                            Ex: [{Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset}, ...]
  */
 async function mousePicker (mouse) {
   const mousePos = mouse.position

@@ -22,7 +22,7 @@ Subscribe to the `onPicked` event.
 const viewer = new Cesium.Viewer('cesiumContainer')
 viewer.extend(CesiumMultiItemPickerMixin)
 viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener(picked => {
-    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]
+    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset} ]
     console.log(picked)
 }, this)
  ```
@@ -49,15 +49,15 @@ See [Cesium.ScreenSpaceEventType.LEFT_CLICK](https://cesium.com/docs/cesiumjs-re
 
 __Returns__
 - `[Array]`
-Types: [Entity](https://cesium.com/docs/cesiumjs-ref-doc/Entity.html?classFilter=entity) , [ImageryLayerFeatureInfo](https://cesium.com/docs/cesiumjs-ref-doc/ImageryLayerFeatureInfo.html?classFilter=feature)
+Types: [Entity](https://cesium.com/docs/cesiumjs-ref-doc/Entity.html?classFilter=entity) , [ImageryLayerFeatureInfo](https://cesium.com/docs/cesiumjs-ref-doc/ImageryLayerFeatureInfo.html?classFilter=feature), [Cesium3DTileset](https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html?classFilter=Cesium3DTileset)
 
-  __ex__: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]`
+  __ex__: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset} ]`
 
 __Example__
 
 ```js
 viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener( picked => {
-    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo} ]
+    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset} ]
     console.log(picked)
 }, this)
 ```
