@@ -77,8 +77,8 @@ async function mousePicker (mouse) {
     const pickedEntities = this._viewer.scene.drillPick(mousePos)
     // if there are entities found
     if (pickedEntities.length) {
-      // extract and store the picked entities only
-      this.pickedList = this.pickedList.concat(pickedEntities.map(x => x.id))
+      // extract and store the picked entities only or the primitive if found
+      this.pickedList = this.pickedList.concat(pickedEntities.map(x => x.id || x.primitive))
     }
   }
   // if there are items picked, raise the event and pass the pickedList array
