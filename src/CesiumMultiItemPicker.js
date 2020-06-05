@@ -56,34 +56,49 @@ export default class CesiumMultiItemPicker {
  * @return  {Array}          The raised event which returns the array of picked items.
 *                            Ex: [{Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset}, ...]
  */
-async function mousePicker (mouse) {
+function mousePicker (mouse) {
   const mousePos = mouse.position
-  // reset the picked list
-  this.pickedList = []
-  // if the current position contains Cartesian coordiantes then the position is on the globe
-  if (isCartesian.call(this, mousePos)) {
+  const pickedImageryItems = new Promise(resolve => {
     // if there are any enabled imagery layers aside from the basemap layer
     if (this._viewer.scene.imageryLayers.length > 1) {
       // get any possible imagery layer features at the provided position coordinates
-      const imageryLayerFeatures = await getImageryLayerFeatures.call(this, mousePos)
-      // if imagery layer features are present
-      if (imageryLayerFeatures.length) {
-        // store the imagery layers feature info
-        this.pickedList = this.pickedList.concat(imageryLayerFeatures)
+      // const imageryLayerFeatures = getImageryLayerFeatures.call(this, mousePos)
+      return getImageryLayerFeatures.call(this, mousePos).then(imageryLayerFeaturesValues => {
+        // if imagery layer features are present
+        if (imageryLayerFeaturesValues.length) {
+          // store the imagery layers feature info
+          resolve(imageryLayerFeaturesValues)
+        }
+      })
+    }
+    return resolve([])
+  })
+  const pickedEntitiesOrPrimitives = () => {
+    // if the current position contains Cartesian coordiantes then the position is on the globe
+    if (isCartesian.call(this, mousePos)) {
+      // look for any enties at the provided position coordinates
+      const pickedEntities = this._viewer.scene.drillPick(mousePos)
+      // if there are entities found
+      if (pickedEntities.length) {
+        // extract and store the picked entities if found or the primitive
+        return pickedEntities.map(x => x.id || x.primitive)
       }
     }
-
-    // look for any enties at the provided position coordinates
-    const pickedEntities = this._viewer.scene.drillPick(mousePos)
-    // if there are entities found
-    if (pickedEntities.length) {
-      // extract and store the picked entities only or the primitive if found
-      this.pickedList = this.pickedList.concat(pickedEntities.map(x => x.id || x.primitive))
-    }
+    return []
   }
-  // if there are items picked, raise the event and pass the pickedList array
-  // otherwise returns an empty array if not picked items found
-  return this.onPicked.raiseEvent(this.pickedList)
+
+  // reset the picked list
+  this.pickedList = []
+
+  // wait for the fetch of imageryFeatureInfo as its async
+  pickedImageryItems.then(pickedImageryItemsVals => {
+    // add any imagery items found and picked entities / primitives
+    this.pickedList = this.pickedList.concat(pickedImageryItemsVals, pickedEntitiesOrPrimitives())
+
+    // if there are items picked, raise the event and pass the pickedList array
+    // otherwise returns an empty array if not picked items found
+    this.onPicked.raiseEvent(this.pickedList)
+  })
 }
 
 /**
