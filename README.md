@@ -4,7 +4,7 @@ Simple multi item picker for Cesium.
 
 This add the ability to drill pick any entities or imagery layers based on the cursor position on the map.
 
-What is then returned is an array with the entities and/or the imagery layer feature info.
+What is then returned is an array with the entities, Cesium3DTileFeature and/or the imagery layer feature info.
 
 ## Install
 `yarn add cesium-multi-item-picker`
@@ -22,7 +22,7 @@ Subscribe to the `onPicked` event.
 const viewer = new Cesium.Viewer('cesiumContainer')
 viewer.extend(CesiumMultiItemPickerMixin)
 viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener(picked => {
-    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset} ]
+    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileFeature} ]
     console.log(picked)
 }, this)
  ```
@@ -51,13 +51,13 @@ __Returns__
 - `[Array]`
 Types: [Entity](https://cesium.com/docs/cesiumjs-ref-doc/Entity.html?classFilter=entity) , [ImageryLayerFeatureInfo](https://cesium.com/docs/cesiumjs-ref-doc/ImageryLayerFeatureInfo.html?classFilter=feature), [Cesium3DTileset](https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html?classFilter=Cesium3DTileset)
 
-  __ex__: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset} ]`
+  __ex__: `[ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileFeature} ]`
 
 __Example__
 
 ```js
 viewer.CesiumMultiItemPickerMixin.onPicked.addEventListener( picked => {
-    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileset} ]
+    // output ex: [ {Entity}, {Entity}, {ImageryLayerFeatureInfo}, {Cesium3DTileFeature} ]
     console.log(picked)
 }, this)
 ```

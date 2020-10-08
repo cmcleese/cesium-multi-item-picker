@@ -73,15 +73,15 @@ function mousePicker (mouse) {
     }
     return resolve([])
   })
-  const pickedEntitiesOrPrimitives = () => {
+  const pickedEntitiesOrExactPicked = () => {
     // if the current position contains Cartesian coordiantes then the position is on the globe
     if (isCartesian.call(this, mousePos)) {
       // look for any enties at the provided position coordinates
       const pickedEntities = this._viewer.scene.drillPick(mousePos)
       // if there are entities found
       if (pickedEntities.length) {
-        // extract and store the picked entities if found or the primitive
-        return pickedEntities.map(x => x.id || x.primitive)
+        // extract and store the picked entities if found or the exact datasource feature
+        return pickedEntities.map(x => x.id || x)
       }
     }
     return []
@@ -93,7 +93,7 @@ function mousePicker (mouse) {
   // wait for the fetch of imageryFeatureInfo as its async
   pickedImageryItems.then(pickedImageryItemsVals => {
     // add any imagery items found and picked entities / primitives
-    this.pickedList = this.pickedList.concat(pickedImageryItemsVals, pickedEntitiesOrPrimitives())
+    this.pickedList = this.pickedList.concat(pickedImageryItemsVals, pickedEntitiesOrExactPicked())
 
     // if there are items picked, raise the event and pass the pickedList array
     // otherwise returns an empty array if not picked items found
