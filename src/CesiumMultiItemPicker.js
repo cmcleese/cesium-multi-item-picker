@@ -80,7 +80,7 @@ function mousePicker (mouse) {
       const pickedEntities = this._viewer.scene.drillPick(mousePos)
       // if there are entities found
       if (pickedEntities.length) {
-        // return exactly what was picked
+        // return exactly what was pickednp
         return pickedEntities
       }
     }
