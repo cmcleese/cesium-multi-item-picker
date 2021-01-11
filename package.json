@@ -1,6 +1,6 @@
 {
   "name": "cesium-multi-item-picker",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Simple multi-item picker for Cesium",
   "main": "dist/viewerCesiumMultiItemPickerMixin.cjs.js",
   "module": "dist/viewerCesiumMultiItemPickerMixin.esm.js",
