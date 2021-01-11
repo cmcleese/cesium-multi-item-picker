@@ -81,7 +81,8 @@ function mousePicker (mouse) {
       // if there are entities found
       if (pickedEntities.length) {
         // extract and store the picked entities if found or the exact datasource feature
-        return pickedEntities.map(x => x.id || x)
+        // or primitive or what has been found
+        return pickedEntities.map(x => x.id || x.primitive || x)
       }
     }
     return []
